@@ -18,7 +18,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.2;
-            background: url('https://images2.imgbox.com/45/b0/6rbH2zWI_o.jpg') no-repeat center center fixed;
+            background-color: #96bfe9;
             background-size: cover;
             color: #333;
             min-height: 100vh;
@@ -30,7 +30,8 @@
         }
 
         .header {
-            background: rgba(39, 18, 51, 0.8);
+            /* Use a gradient background matching the body */
+            background: linear-gradient(135deg, #7e9be7 0%, #b993d6 100%);
             color: white;
             padding: 2rem;
             text-align: center;
@@ -40,11 +41,20 @@
         }
 
         .header h1 {
-            font-size: 1.0rem;
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(60, 60, 120, 0.18), 0 1px 0 #fff;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
         }
 
-        .header p {
-            font-size: 1.2rem;
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.3rem;
+                padding: 0.5rem 0.2rem;
+                word-break: break-word;
+            }
         }
 
         .container {
@@ -72,8 +82,8 @@
 
         .feature-btn {
             padding: 2rem;
-            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-            color: white;
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+            color: #fff;
             border: none;
             border-radius: 15px;
             cursor: pointer;
@@ -101,7 +111,13 @@
         }
 
         .feature-btn.gpa {
-            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            background: linear-gradient(135deg, #41a39b 0%, #95e0b2 100%);
+            color: #fff;
+        }
+
+        .feature-btn.blog {
+            background: linear-gradient(135deg, #7873aa 0%, #c2b5d6 100%);
+            color: #333;
         }
 
         .feature-icon {
@@ -507,7 +523,7 @@
                 GPA Calculator
             </button>
 
-            <button class="feature-btn" onclick="openUrl()">
+            <button class="feature-btn blog" onclick="openUrl()">
                 <span class="feature-icon">📝</span>
                 Blog
             </button>
