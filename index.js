@@ -276,7 +276,7 @@ function loadCoursesForGPA() {
             courseDiv.innerHTML = `
                 <div style="flex: 1">${units} Units - ${course.code} - ${course.name} (${course.type})</div>
                 <select class="grade-select" id="grade-${course.code}">
-                    <option value="">Select Grade</option>
+                    <option value="" style="background:black">Select Grade</option>
                     ${Object.keys(gradePoints).map(grade => 
                         `<option value="${grade}">${grade}</option>`
                     ).join('')}
