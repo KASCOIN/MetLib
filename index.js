@@ -7,14 +7,35 @@ function toggleFeature(featureName) {
         'gpa': document.getElementById('gpaSection')
     };
 
+    // Helper to fade out a section
+    function fadeOut(section) {
+        if (!section) return;
+        section.style.transition = 'opacity 0.5s ease-in-out';
+        section.style.opacity = 0;
+        setTimeout(() => {
+            section.style.display = 'none';
+        }, 500);
+    }
+
+    // Helper to fade in a section
+    function fadeIn(section) {
+        if (!section) return;
+        section.style.display = 'block';
+        section.style.opacity = 0;
+        section.style.transition = 'opacity 0.5s ease-in-out';
+        setTimeout(() => {
+            section.style.opacity = 1;
+        }, 10); // slight delay to trigger transition
+    }
+
     if (activeFeature === featureName) {
-        features[featureName].style.display = 'none';
+        fadeOut(features[featureName]);
         activeFeature = null;
     } else {
         if (activeFeature) {
-            features[activeFeature].style.display = 'none';
+            fadeOut(features[activeFeature]);
         }
-        features[featureName].style.display = 'block';
+        fadeIn(features[featureName]);
         activeFeature = featureName;
         if (featureName === 'gpa') {
     document.getElementById('gpaCalculator').style.display = 'block'; // Add this line
@@ -300,4 +321,57 @@ function calculateGPA() {
 
 function openUrl() {
     window.location.href = 'blog.html';
+}
+
+
+// 1. Get references to your elements
+const pageContent = document.getElementById('page-content');
+const preloader = document.getElementById('preloader');
+
+// 2. Define the background image URL (MUST match CSS)
+const backgroundImageURL = 'https://images2.imgbox.com/45/b0/6rbH2zWI_o.jpg'; // **DOUBLE-CHECK THIS PATH**
+
+// 3. Create a new Image object
+const bgImage = new Image();
+
+// 4. Set the onload event handler BEFORE setting the src
+bgImage.onload = function() {
+    console.log('Background image loaded successfully!'); // Debugging message
+
+    // Fade out preloader
+    if (preloader) {
+        preloader.style.opacity = 0;
+        setTimeout(() => {
+            preloader.style.display = 'none'; // Hide completely after transition
+        }, 1000); // Match CSS transition duration
+    }
+
+    // Fade in page content
+    if (pageContent) {
+        pageContent.style.opacity = 1;
+        // If you used display: none; for pageContent, change it here:
+        // pageContent.style.display = 'block'; // or 'flex', etc.
+    } else {
+        console.error('Error: #page-content element not found!');
+    }
+};
+
+// 5. Handle potential errors during image loading
+bgImage.onerror = function() {
+    console.error('Error: Background image failed to load! Check the path: ' + backgroundImageURL);
+    // Fallback: If image fails, show content anyway after a short delay
+    setTimeout(() => {
+            if (preloader) preloader.style.display = 'none';
+            if (pageContent) pageContent.style.opacity = 1;
+    }, 1000);
+};
+
+// 6. Set the image source (this starts the download)
+bgImage.src = backgroundImageURL;
+
+// 7. Important: Check if the image is already cached/complete
+// This handles cases where the image loads instantly from cache before onload is attached
+if (bgImage.complete) {
+    console.log('Background image already complete (from cache). Triggering onload.');
+    bgImage.onload(); // Manually trigger the onload function
 }
