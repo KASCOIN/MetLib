@@ -22,7 +22,7 @@ function toggleFeature(featureName) {
         if (!section) return;
         section.style.display = 'block';
         section.style.opacity = 0;
-        section.style.transition = 'opacity 0.5s ease-in-out';
+        section.style.transition = 'opacity 0.2s ease-in-out';
         setTimeout(() => {
             section.style.opacity = 1;
         }, 10); // slight delay to trigger transition
